@@ -1,5 +1,8 @@
 package com.example.client.repository
 
+import com.example.client.database.RepoDao
+import com.example.client.database.mapToDBEntity
+import com.example.client.database.mapToReposList
 import com.example.client.model.Commits
 import com.example.client.model.GithubRepo
 import com.example.client.model.RepoDetail
@@ -10,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val api: GithubAPI) {
+class Repository @Inject constructor(private val api: GithubAPI, private val rd: RepoDao) {
 
     suspend fun getReposFromApi(): Flow<DataState<List<RepositoryModel>>> = flow {
         try {
@@ -23,12 +26,16 @@ class Repository @Inject constructor(private val api: GithubAPI) {
         }
     }
 
-    fun getFavoritesRepos() {
-
+    suspend fun getFavoritesRepos() {
+        rd.getAllRepos().mapToReposList()
     }
 
-    fun getAboutInfo(): String? {
-        return "info"
+    suspend fun addToFavorites(repoDetail: RepoDetail) {
+        rd.addRepo(repoDetail.mapToDBEntity())
+    }
+
+    suspend fun deleteFromFavorites(repoDetail: RepoDetail) {
+        rd.deleteRepo(repoDetail.mapToDBEntity())
     }
 
     fun getRepoByName(fulName: String): Flow<DataState<RepoDetail>> = flow {

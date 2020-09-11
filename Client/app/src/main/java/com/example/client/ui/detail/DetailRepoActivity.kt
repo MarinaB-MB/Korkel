@@ -1,7 +1,7 @@
 package com.example.client.ui.detail
 
 import android.os.Bundle
-import android.os.Handler
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,9 +28,23 @@ class DetailRepoActivity : AppCompatActivity(R.layout.activity_detail_repo) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val actionBar = supportActionBar!!
+        actionBar.setHomeButtonEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
         getData()
         initObserver()
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun getData() {
         fulName = intent?.extras?.getString(FULL_NAME)
@@ -85,13 +99,6 @@ class DetailRepoActivity : AppCompatActivity(R.layout.activity_detail_repo) {
     }
 
     private fun initView(repoDetail: RepoDetail) {
-        swrLayoutDetail.setOnRefreshListener {
-            Handler().postDelayed({
-                swrLayoutDetail.isRefreshing = false
-                viewModel.getRepo(fulName!!)
-                viewModel.getCommits(fulName!!)
-            }, 1500)
-        }
         repoDetail.apply {
             tvName.text = name
             tvAuthor.text = owner.login

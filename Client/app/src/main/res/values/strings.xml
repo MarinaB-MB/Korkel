@@ -8,4 +8,5 @@
     <string name="last_commits">Последние коммиты:</string>
     <string name="repo_name">Название репозитория</string>
     <string name="author">Автор</string>
+    <string name="org">Организация</string>
 </resources>

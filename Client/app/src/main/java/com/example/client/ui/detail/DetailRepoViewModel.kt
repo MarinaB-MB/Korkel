@@ -39,6 +39,7 @@ class DetailRepoViewModel @ViewModelInject constructor(private val repository: R
         }
     }
 
+
     private fun subscribeDataDetail(dataState: DataState<RepoDetail>) {
         when (dataState) {
             is DataState.Loading -> {

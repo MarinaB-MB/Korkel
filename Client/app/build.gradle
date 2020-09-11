@@ -97,6 +97,9 @@ dependencies {
     //Okhttp3
     def okhttp3_version = "4.3.1"
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
+
+    //swipe recycler view
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
 }

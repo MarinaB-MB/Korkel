@@ -21,6 +21,12 @@ class ReposFragment : Fragment(R.layout.fragment_repos) {
     private val viewModel: ReposViewModel by viewModels()
 
     private lateinit var adapter: ReposAdapter
+    private var status = " "
+
+    companion object {
+        const val ADD = "add"
+        const val DELETE = "delete"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,6 +59,33 @@ class ReposFragment : Fragment(R.layout.fragment_repos) {
                 }
             }
         })
+        viewModel.repoDetail.observe(viewLifecycleOwner, {
+            when (it) {
+                is DataState.Loading -> {
+                    pvLoad.makeVisible()
+                    rvRepos.makeGone()
+                    ivError.makeGone()
+                    llHeader.makeGone()
+                }
+                is DataState.Error -> {
+                    ivError.makeVisible()
+                    pvLoad.makeGone()
+                    rvRepos.makeGone()
+                    llHeader.makeGone()
+                }
+                is DataState.Success -> {
+                    ivError.makeGone()
+                    llHeader.makeVisible()
+                    pvLoad.makeGone()
+                    rvRepos.makeVisible()
+                    if (status == ADD)
+                        viewModel.addToDB(it.data)
+                    else viewModel.deleteFromDb(it.data)
+                }
+            }
+        })
+
+
     }
 
     private fun initView() {
@@ -67,6 +100,17 @@ class ReposFragment : Fragment(R.layout.fragment_repos) {
             override fun onRepoClick(fullName: String) {
                 showDetailActivity(fullName)
             }
+        }, object : ReposAdapter.OnFavoriteEventListener {
+            override fun addToFavorite(fullName: String) {
+                status = ADD
+                viewModel.getRepo(fullName)
+            }
+
+            override fun deleteFromFavorite(fullName: String) {
+                status = DELETE
+                viewModel.getRepo(fullName)
+            }
+
         })
         rvRepos.adapter = adapter
     }

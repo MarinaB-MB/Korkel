@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.row_repository.view.*
 
 class ReposAdapter(
     private var repoList: List<RepositoryModel>,
-    val clickListener: OnRepoClickListener? = null
+    val clickListener: OnRepoClickListener? = null,
+    val favoriteListener: OnFavoriteEventListener? = null
 ) :
     RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
 
@@ -37,7 +38,6 @@ class ReposAdapter(
         }
     }
 
-
     fun setData(list: List<RepositoryModel>) {
         repoList = list
         notifyDataSetChanged()
@@ -45,5 +45,10 @@ class ReposAdapter(
 
     interface OnRepoClickListener {
         fun onRepoClick(fullName: String)
+    }
+
+    interface OnFavoriteEventListener {
+        fun addToFavorite(fullName: String)
+        fun deleteFromFavorite(fullName: String)
     }
 }

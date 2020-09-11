@@ -14,6 +14,8 @@ import com.example.client.utils.makeGone
 import com.example.client.utils.makeVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_github_repo.*
+import kotlinx.android.synthetic.main.fragment_github_repo.llHeader
+import kotlinx.android.synthetic.main.fragment_repos.*
 import kotlinx.android.synthetic.main.fragment_repos.ivError
 import kotlinx.android.synthetic.main.fragment_repos.pvLoad
 import kotlinx.android.synthetic.main.fragment_repos.rvRepos
@@ -37,16 +39,19 @@ class GithubRepoFragment : Fragment(R.layout.fragment_github_repo) {
                     pvLoad.makeVisible()
                     rvRepos.makeGone()
                     ivError.makeGone()
+                    llHeader.makeGone()
                 }
                 is DataState.Error -> {
                     it.exception.printStackTrace()
                     ivError.makeVisible()
                     pvLoad.makeGone()
+                    llHeader.makeGone()
                     rvRepos.makeGone()
                 }
                 is DataState.Success -> {
                     ivError.makeGone()
                     pvLoad.makeGone()
+                    llHeader.makeVisible()
                     rvRepos.makeVisible()
                     adapter.setData(it.data)
                 }
