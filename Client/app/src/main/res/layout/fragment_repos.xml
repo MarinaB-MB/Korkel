@@ -41,7 +41,6 @@
             android:layout_height="match_parent"
             android:layout_below="@id/llHeader"
             android:layout_marginHorizontal="@dimen/default_margin"
-
             android:visibility="visible"
             tools:listitem="@layout/row_repository" />
 

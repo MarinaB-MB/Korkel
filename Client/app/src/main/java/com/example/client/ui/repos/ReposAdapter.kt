@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.row_repository.view.*
 
 
 class ReposAdapter(
-    private var repoList: List<RepositoryModel>,
+    private var repoList: MutableList<RepositoryModel>,
     val clickListener: OnRepoClickListener? = null,
 ) :
     RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
@@ -37,9 +37,18 @@ class ReposAdapter(
         }
     }
 
-    fun setData(list: List<RepositoryModel>) {
-        repoList = list
+    fun addItems(data: List<RepositoryModel>) {
+        repoList.addAll(data)
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int) {
+        repoList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun getElement(position: Int): RepositoryModel {
+        return repoList[position]
     }
 
     interface OnRepoClickListener {

@@ -101,5 +101,6 @@ dependencies {
 
     //swipe recycler view
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 
 }

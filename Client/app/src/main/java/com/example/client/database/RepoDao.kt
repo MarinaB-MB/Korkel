@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface RepoDao {
     @Query("SELECT * FROM favorites_table")
-    suspend fun getAllRepos(): List<RepoDBEntity>
+    suspend fun getAllRepos(): MutableList<RepoDBEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addRepo(photo: RepoDBEntity)

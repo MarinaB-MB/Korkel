@@ -8,20 +8,20 @@
 
 
     <TextView
+        android:paddingVertical="@dimen/default_margin"
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingVertical="@dimen/default_margin"
         tools:text="Название репо" />
 
     <TextView
         android:id="@+id/tvAuthor"
+        android:paddingVertical="@dimen/default_margin"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="end"
-        android:paddingVertical="@dimen/default_margin"
         android:textAlignment="textEnd"
         tools:text="Michael" />
 </LinearLayout>

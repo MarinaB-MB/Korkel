@@ -15,10 +15,15 @@ import retrofit2.http.Query
 interface GithubAPI {
 
     @GET(GET_REPOS)
-    suspend fun getRepos(): List<RepositoryModel>
+    suspend fun getRepos(
+    ): List<RepositoryModel>
 
     @GET(GET_REPOS_GITHUB)
-    suspend fun getReposFromGitHubOwner(@Path("org") org: String = "github"): List<GithubRepo>
+    suspend fun getReposFromGitHubOwner(
+        @Path("org") org: String,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 100
+    ): List<GithubRepo>
 
     @GET(GET_REPO)
     suspend fun getRepoDetail(@Path("user") user: String, @Path("repo") repo: String): RepoDetail

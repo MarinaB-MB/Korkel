@@ -9,4 +9,5 @@
     <string name="repo_name">Название репозитория</string>
     <string name="author">Автор</string>
     <string name="org">Организация</string>
+    <string name="author_or_org">Автор или организация</string>
 </resources>

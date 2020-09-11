@@ -1,5 +1,6 @@
 package com.example.client.repository
 
+import android.util.Log
 import com.example.client.database.RepoDao
 import com.example.client.database.mapToDBEntity
 import com.example.client.database.mapToReposList
@@ -9,13 +10,15 @@ import com.example.client.model.RepoDetail
 import com.example.client.model.RepositoryModel
 import com.example.client.network.GithubAPI
 import com.example.client.utils.DataState
+import com.example.client.utils.GITHUB
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class Repository @Inject constructor(private val api: GithubAPI, private val rd: RepoDao) {
 
-    suspend fun getReposFromApi(): Flow<DataState<List<RepositoryModel>>> = flow {
+    suspend fun getReposFromApi(
+    ): Flow<DataState<List<RepositoryModel>>> = flow {
         try {
             emit(DataState.Loading)
             val reposFromApi = api.getRepos()
@@ -26,8 +29,16 @@ class Repository @Inject constructor(private val api: GithubAPI, private val rd:
         }
     }
 
-    suspend fun getFavoritesRepos() {
-        rd.getAllRepos().mapToReposList()
+    suspend fun getFavoritesRepos(): Flow<DataState<List<RepoDetail>>> = flow {
+        Log.e("TAG", "getFavoritesRepos: ${rd.getAllRepos().size} ")
+        try {
+            emit(DataState.Loading)
+            val repoFromDB = rd.getAllRepos().mapToReposList()
+            emit(DataState.Success(repoFromDB))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emit(DataState.Error(e))
+        }
     }
 
     suspend fun addToFavorites(repoDetail: RepoDetail) {
@@ -62,10 +73,13 @@ class Repository @Inject constructor(private val api: GithubAPI, private val rd:
         }
     }
 
-    fun getReposFromGitHubOwner(): Flow<DataState<List<GithubRepo>>> = flow {
+    fun getReposFromGitHubOwner(
+        page: Int = 1,
+        perPage: Int = 100
+    ): Flow<DataState<List<GithubRepo>>> = flow {
         try {
             emit(DataState.Loading)
-            val githubRepoFromApi = api.getReposFromGitHubOwner()
+            val githubRepoFromApi = api.getReposFromGitHubOwner(GITHUB, page, perPage)
             emit(DataState.Success(githubRepoFromApi))
         } catch (e: Exception) {
             e.printStackTrace()

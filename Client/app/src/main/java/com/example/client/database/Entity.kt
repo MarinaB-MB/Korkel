@@ -52,6 +52,6 @@ fun RepoDBEntity.mapToRepoDetail(): RepoDetail {
     )
 }
 
-fun List<RepoDBEntity>.mapToReposList(): List<RepoDetail> {
-    return map { it.mapToRepoDetail() }
+fun MutableList<RepoDBEntity>.mapToReposList(): MutableList<RepoDetail> {
+    return map { it.mapToRepoDetail() } as MutableList<RepoDetail>
 }
