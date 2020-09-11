@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Client</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_repos">Репозитории</string>
+    <string name="title_favorite">Избранное</string>
+    <string name="title_repo_github">Github</string>
+    <string name="repo_description">Описание репозитория:</string>
+    <string name="progrmming_languages">Языки програмиирования:</string>
+    <string name="last_commits">Последние коммиты:</string>
+    <string name="repo_name">Название репозитория</string>
+    <string name="author">Автор</string>
 </resources>
