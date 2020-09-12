@@ -4,24 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    <TextView
-        android:paddingVertical="@dimen/default_margin"
-        android:id="@+id/tvName"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:text="Название репо" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_indeterminate_check_box_24" />
 
-    <TextView
-        android:id="@+id/tvAuthor"
-        android:paddingVertical="@dimen/default_margin"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="end"
-        android:textAlignment="textEnd"
-        tools:text="Michael" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:paddingVertical="@dimen/default_margin"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                tools:text="Название репо" />
+
+            <TextView
+                android:id="@+id/tvAuthor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:paddingVertical="@dimen/default_margin"
+                android:textAlignment="textEnd"
+                tools:text="Michael" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/Lgrey" />
+
 </LinearLayout>
