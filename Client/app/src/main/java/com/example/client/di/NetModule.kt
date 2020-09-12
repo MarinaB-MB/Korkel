@@ -1,6 +1,7 @@
 package com.example.client.di
 
 import com.example.client.network.GithubAPI
+import com.example.client.utils.AuthInterceptor
 import com.example.client.utils.BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -8,7 +9,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,12 +32,10 @@ object NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
-            .addInterceptor(Interceptor.invoke { chain ->
-                val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "c93f24fa0d12578e57630c2c9ee00b0c53caa7af").build()
-                return@invoke chain.proceed(request)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
             })
+            .addInterceptor(AuthInterceptor(TOKEN))
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .build()
@@ -54,3 +52,5 @@ object NetworkModule {
     fun provideRestService(retrofit: Retrofit.Builder): GithubAPI =
         retrofit.build().create(GithubAPI::class.java)
 }
+
+const val TOKEN = "c93f24fa0d12578e57630c2c9ee00b0c53caa7af"

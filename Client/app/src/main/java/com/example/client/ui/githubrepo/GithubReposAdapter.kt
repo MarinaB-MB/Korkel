@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.row_repository.view.*
 
 
 class GithubReposAdapter(
-    private var repoList: List<GithubRepo>,
+    private var repoList: MutableList<GithubRepo>,
     val clickListener: OnRepoClickListener? = null
 ) :
     RecyclerView.Adapter<GithubReposAdapter.RepoViewHolder>() {
@@ -41,8 +41,8 @@ class GithubReposAdapter(
         return repoList[position]
     }
 
-    fun setData(list: List<GithubRepo>) {
-        repoList = list
+    fun addList(list: List<GithubRepo>) {
+        repoList.addAll(list)
         notifyDataSetChanged()
     }
 

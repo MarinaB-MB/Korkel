@@ -60,7 +60,7 @@ class GithubRepoFragment : Fragment(R.layout.fragment_github_repo), PageListener
                     pvLoad.makeGone()
                     llHeader.makeVisible()
                     rvRepos.makeVisible()
-                    adapter.setData(it.data)
+                    adapter.addList(it.data)
                 }
             }
         })
@@ -86,11 +86,12 @@ class GithubRepoFragment : Fragment(R.layout.fragment_github_repo), PageListener
         }
         val llm = LinearLayoutManager(context)
         rvRepos.layoutManager = llm
-        adapter = GithubReposAdapter(listOf(), object : GithubReposAdapter.OnRepoClickListener {
-            override fun onRepoClick(fullName: String) {
-                showDetailActivity(fullName)
-            }
-        })
+        adapter =
+            GithubReposAdapter(mutableListOf(), object : GithubReposAdapter.OnRepoClickListener {
+                override fun onRepoClick(fullName: String) {
+                    showDetailActivity(fullName)
+                }
+            })
         rvRepos.adapter = adapter
         val itemTouchHelper = ItemTouchHelper(object : SwipeHelper(rvRepos) {
             override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
