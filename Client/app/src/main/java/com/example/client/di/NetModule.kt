@@ -1,8 +1,10 @@
 package com.example.client.di
 
-import com.example.client.network.GithubAPI
+import com.example.client.network.GithubService
 import com.example.client.utils.AuthInterceptor
 import com.example.client.utils.BASE_URL
+import com.example.client.utils.LOGIN
+import com.example.client.utils.PASSWORD
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -18,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object NetworkModule {
+object NetModule {
     @Singleton
     @Provides
     fun provideRetrofit(client: OkHttpClient, gson: Gson): Retrofit.Builder {
@@ -35,7 +37,7 @@ object NetworkModule {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .addInterceptor(AuthInterceptor(TOKEN))
+            .addInterceptor(AuthInterceptor(LOGIN, PASSWORD))
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .build()
@@ -49,8 +51,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRestService(retrofit: Retrofit.Builder): GithubAPI =
-        retrofit.build().create(GithubAPI::class.java)
+    fun provideRestService(retrofit: Retrofit.Builder): GithubService =
+        retrofit.build().create(GithubService::class.java)
 }
-
-const val TOKEN = "c93f24fa0d12578e57630c2c9ee00b0c53caa7af"

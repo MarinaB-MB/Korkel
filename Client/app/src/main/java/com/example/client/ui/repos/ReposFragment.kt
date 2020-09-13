@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.client.R
 import com.example.client.ui.detail.DetailRepoActivity
 import com.example.client.ui.detail.DetailRepoActivity.Companion.FULL_NAME
-import com.example.client.utils.DataState
-import com.example.client.utils.makeGone
-import com.example.client.utils.makeVisible
+import com.example.client.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_repos.*
 

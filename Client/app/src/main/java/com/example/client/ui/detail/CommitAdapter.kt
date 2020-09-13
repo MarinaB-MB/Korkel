@@ -32,7 +32,7 @@ class CommitAdapter(
             with(itemView) {
                 tvDescription.text = commitDet.commit.message
                 tvDate.text = formatWithPattern(commitDet.commit.author.date)
-                tvAuthor.text = commitDet.committer?.login ?: "Unknown"
+                tvAuthor.text = commitDet.committer?.login ?: context.getString(R.string.unknown)
                 Glide.with(context)
                     .load(commitDet.committer?.avatar_url)
                     .centerCrop()

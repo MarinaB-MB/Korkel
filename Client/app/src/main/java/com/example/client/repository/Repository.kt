@@ -1,6 +1,5 @@
 package com.example.client.repository
 
-import android.util.Log
 import com.example.client.database.RepoDao
 import com.example.client.database.mapToDBEntity
 import com.example.client.database.mapToReposList
@@ -8,14 +7,14 @@ import com.example.client.model.Commits
 import com.example.client.model.GithubRepo
 import com.example.client.model.RepoDetail
 import com.example.client.model.RepositoryModel
-import com.example.client.network.GithubAPI
+import com.example.client.network.GithubService
 import com.example.client.utils.DataState
 import com.example.client.utils.GITHUB
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val api: GithubAPI, private val rd: RepoDao) {
+class Repository @Inject constructor(private val api: GithubService, private val rd: RepoDao) {
 
     suspend fun getReposFromApi(
     ): Flow<DataState<List<RepositoryModel>>> = flow {
@@ -30,7 +29,6 @@ class Repository @Inject constructor(private val api: GithubAPI, private val rd:
     }
 
     suspend fun getFavoritesRepos(): Flow<DataState<List<RepoDetail>>> = flow {
-        Log.e("TAG", "getFavoritesRepos: ${rd.getAllRepos().size} ")
         try {
             emit(DataState.Loading)
             val repoFromDB = rd.getAllRepos().mapToReposList()

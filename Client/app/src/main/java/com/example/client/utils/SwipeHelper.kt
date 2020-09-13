@@ -1,4 +1,4 @@
-package com.example.client.ui.repos
+package com.example.client.utils
 
 import android.annotation.SuppressLint
 import android.graphics.Canvas

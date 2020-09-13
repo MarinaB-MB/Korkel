@@ -9,26 +9,17 @@ data class RepositoryModel(
     val id: Int,
     val name: String,
     val full_name: String,
-    val owner: Owner,
+    val owner: Owner
 ) : Parcelable
 
 @Parcelize
 data class Owner(
     val id: Int,
     val login: String,
-    val avatar_url: String,
+    val avatar_url: String
 ) : Parcelable
 
 /////////////////////////
-
-@Parcelize
-data class License(
-    val key: String,
-    val name: String,
-    val spdx_id: String,
-    val url: String,
-    val node_id: String
-) : Parcelable
 
 @Parcelize
 data class RepoDetail(
@@ -50,7 +41,7 @@ data class Commits(
     val author: Author,
     val committer: Committer?,
     val parents: List<Parents>
-) : Parcelable {}
+) : Parcelable
 
 
 @Parcelize
@@ -58,7 +49,7 @@ data class Commit(
     val author: InnerAuthor,
     val committer: Committer?,
     val message: String,
-) : Parcelable {}
+) : Parcelable
 
 @Parcelize
 data class Author(
@@ -79,35 +70,21 @@ data class Committer(
     val login: String? = "",
     val id: Int,
     val avatar_url: String,
-) : Parcelable {}
+) : Parcelable
 
 @Parcelize
 data class Parents(
     val sha: String,
     val url: String,
     val html_url: String
-) : Parcelable {}
-
-@Parcelize
-data class Tree(
-    val sha: String,
-    val url: String
-) : Parcelable {}
-
-@Parcelize
-data class Verification(
-
-    val verified: Boolean,
-    val reason: String,
-    val signature: String,
-    val payload: String
-) : Parcelable {}
+) : Parcelable
 
 //////
+
 @Parcelize
 data class GithubRepo(
     val id: Int,
     val name: String,
     val full_name: String,
     val owner: Owner,
-) : Parcelable {}
+) : Parcelable

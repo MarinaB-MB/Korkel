@@ -12,7 +12,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface GithubAPI {
+interface GithubService {
+
 
     @GET(GET_REPOS)
     suspend fun getRepos(
