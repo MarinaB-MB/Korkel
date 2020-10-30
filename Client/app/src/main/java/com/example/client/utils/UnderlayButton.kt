@@ -6,10 +6,6 @@ import android.view.MotionEvent
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 
-interface UnderlayButtonClickListener {
-    fun onClick()
-}
-
 class UnderlayButton(
     private val context: Context,
     private val title: String,
@@ -21,7 +17,6 @@ class UnderlayButton(
     private val textSizeInPixel: Float = textSize * context.resources.displayMetrics.density
     private val horizontalPadding = 50.0f
     val intrinsicWidth: Float
-
     init {
         val paint = Paint()
         paint.textSize = textSizeInPixel
@@ -59,4 +54,9 @@ class UnderlayButton(
             }
         }
     }
+
+}
+
+interface UnderlayButtonClickListener {
+    fun onClick()
 }

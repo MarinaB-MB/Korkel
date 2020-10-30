@@ -8,7 +8,6 @@ import com.example.client.R
 import com.example.client.model.RepositoryModel
 import kotlinx.android.synthetic.main.row_repository.view.*
 
-
 class ReposAdapter(
     private var repoList: MutableList<RepositoryModel>,
     val clickListener: OnRepoClickListener? = null,
@@ -25,7 +24,6 @@ class ReposAdapter(
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.bind(repoList[position])
     }
-
 
     inner class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(repoDetail: RepositoryModel) {
